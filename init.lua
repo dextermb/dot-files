@@ -100,6 +100,12 @@ vim.g.have_nerd_font = true
 
 -- vim.o.autochdir = true
 
+vim.o.tabstop = 2
+vim.o.shiftwidth = 2
+vim.o.expandtab = true
+
+vim.opt.wrap = false
+
 -- Make line numbers default
 vim.opt.number = true
 -- You can also add relative line numbers, to help with jumping.
@@ -654,9 +660,10 @@ require('lazy').setup({
             preferences = {
               includeCompletionsForModuleExports = true,
               includeCompletionsForImportStatements = true,
-              importModuleSpecifierPreference = 'relative',
+              importModuleSpecifierPreference = 'non-relative',
             },
           },
+          root_dir = require('lspconfig').util.root_pattern('tsconfig.json', 'package.json', '.git'),
         },
 
         lua_ls = {
@@ -692,6 +699,8 @@ require('lazy').setup({
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
       require('mason-lspconfig').setup {
+        ensure_installed = {},
+        automatic_installation = true,
         handlers = {
           function(server_name)
             local server = servers[server_name] or {}
@@ -958,11 +967,11 @@ require('lazy').setup({
   --  Here are some example plugins that I've included in the Kickstart repository.
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
   --
-  -- require 'kickstart.plugins.debug',
-  -- require 'kickstart.plugins.indent_line',
+  require 'kickstart.plugins.debug',
+  require 'kickstart.plugins.indent_line',
   -- require 'kickstart.plugins.lint',
-  -- require 'kickstart.plugins.autopairs',
-  -- require 'kickstart.plugins.neo-tree',
+  require 'kickstart.plugins.autopairs',
+  require 'kickstart.plugins.neo-tree',
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
