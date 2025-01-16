@@ -100,10 +100,12 @@ vim.g.have_nerd_font = true
 
 -- vim.o.autochdir = true
 
+-- Set default tabbing
 vim.o.tabstop = 2
 vim.o.shiftwidth = 2
 vim.o.expandtab = true
 
+-- Disable text wrap
 vim.opt.wrap = false
 
 -- Make line numbers default
@@ -164,10 +166,6 @@ vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
-
--- Disable netrw plugin
-vim.g.loaded_netrw = false
-vim.g.loaded_netrwPlugin = false
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
