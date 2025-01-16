@@ -250,6 +250,71 @@ require('lazy').setup({
   -- Use `opts = {}` to force a plugin to be loaded.
   --
 
+  {
+    'ThePrimeagen/harpoon',
+    branch = 'harpoon2',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    config = function()
+      local harpoon = require 'harpoon'
+
+      harpoon:setup()
+
+      vim.keymap.set('n', '<leader>ha', function()
+        harpoon:list():add()
+      end, { desc = '[a]dd buffer to harpoon' })
+      vim.keymap.set('n', '<leader>hr', function()
+        harpoon:list():remove()
+      end, { desc = '[r]emove harpoon buffer' })
+      vim.keymap.set('n', '<leader>ht', function()
+        harpoon.ui:toggle_quick_menu(harpoon:list())
+      end, { desc = '[t]oggle harpoon menu' })
+
+      -- vim.keymap.set('n', '<C-h>', function()
+      --   harpoon:list():select(1)
+      -- end, { desc = 'Select first harpoon buffer' })
+      -- vim.keymap.set('n', '<C-t>', function()
+      --   harpoon:list():select(2)
+      -- end, { desc = 'Select second harpoon buffer' })
+      -- vim.keymap.set('n', '<C-n>', function()
+      --   harpoon:list():select(3)
+      -- end, { desc = 'Select third harpoon buffer' })
+      -- vim.keymap.set('n', '<C-s>', function()
+      --   harpoon:list():select(4)
+      -- end, { desc = 'Select fourth harpoon buffer' })
+
+      -- Toggle previous & next buffers stored within Harpoon list
+      vim.keymap.set('n', '<leader>hp', function()
+        harpoon:list():prev()
+      end, { desc = '[p]rev. harpoon buffer' })
+      vim.keymap.set('n', '<leader>hn', function()
+        harpoon:list():next()
+      end, { desc = '[n]ext harpoon buffer' })
+
+      -- local conf = require('telescope.config').values
+      -- local function toggle_telescope(harpoon_files)
+      --   local file_paths = {}
+      --   for _, item in ipairs(harpoon_files.items) do
+      --     table.insert(file_paths, item.value)
+      --   end
+      --
+      --   require('telescope.pickers')
+      --     .new({}, {
+      --       prompt_title = 'Harpoon',
+      --       finder = require('telescope.finders').new_table {
+      --         results = file_paths,
+      --       },
+      --       previewer = conf.file_previewer {},
+      --       sorter = conf.generic_sorter {},
+      --     })
+      --     :find()
+      -- end
+      --
+      -- vim.keymap.set('n', '<C-e>', function()
+      --   toggle_telescope(harpoon:list())
+      -- end, { desc = 'Open harpoon window' })
+    end,
+  },
+
   -- Here is a more advanced example where we pass configuration
   -- options to `gitsigns.nvim`. This is equivalent to the following Lua:
   --    require('gitsigns').setup({ ... })
